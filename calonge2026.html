@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Costa Brava 2026 🌊</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sea: #1a7a8a;
+    --sea-light: #e0f4f7;
+    --sand: #f5ede0;
+    --terracotta: #c4512a;
+    --terracotta-light: #faeada;
+    --sun: #f0b429;
+    --sun-light: #fef7e0;
+    --green: #2d7a4f;
+    --green-light: #e2f4ea;
+    --text: #1c1c1c;
+    --text-muted: #6b6b6b;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--sea);
+    color: white;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 60px;
+    background: var(--sand);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .waves {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.07;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      white 20px,
+      white 21px
+    );
+    pointer-events: none;
+  }
+
+  .hero-emoji { font-size: 3.5rem; display: block; margin-bottom: 1rem; animation: bob 3s ease-in-out infinite; }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sun);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .crew {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+  }
+
+  .crew-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 1.5rem 1rem;
+    background: var(--sand);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .nav a:hover {
+    color: var(--sea);
+    border-color: var(--sea);
+    background: var(--sea-light);
+  }
+
+  /* MAIN */
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+  .section { margin-bottom: 3rem; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .section-icon.sea { background: var(--sea-light); }
+  .section-icon.sun { background: var(--sun-light); }
+  .section-icon.terra { background: var(--terracotta-light); }
+  .section-icon.green { background: var(--green-light); }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* URGENT BANNER */
+  .urgent-banner {
+    background: var(--terracotta);
+    color: white;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .urgent-banner .ub-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .urgent-banner h3 { font-size: 1rem; font-weight: 500; margin-bottom: 2px; }
+  .urgent-banner p { font-size: 0.875rem; opacity: 0.88; }
+  .urgent-banner a { color: white; font-weight: 500; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+  .card-emoji { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+  .card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; color: var(--text); }
+  .card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+  .card .dist {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--sea);
+    background: var(--sea-light);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .card .badge-resa {
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: var(--terracotta);
+    color: white;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .card .badge-fam {
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: var(--green);
+    color: white;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  /* CONCERT TABLE */
+  .concert-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .concert-item {
+    background: white;
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform 0.15s;
+  }
+
+  .concert-item:hover { transform: translateX(4px); }
+
+  .concert-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--sea);
+    min-width: 52px;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .concert-date span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 500; color: var(--text-muted); }
+
+  .concert-info { flex: 1; min-width: 0; }
+  .concert-info h3 { font-size: 0.95rem; font-weight: 500; }
+  .concert-info p { font-size: 0.82rem; color: var(--text-muted); }
+
+  .concert-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .tag-star { background: var(--sun-light); color: #7a5500; }
+  .tag-fam { background: var(--green-light); color: var(--green); }
+  .tag-local { background: var(--sea-light); color: var(--sea); }
+
+  /* PLAGES */
+  .beach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+
+  .beach-card {
+    background: var(--sea);
+    color: white;
+    border-radius: 16px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .beach-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+
+  .beach-card h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
+  .beach-card p { font-size: 0.82rem; opacity: 0.82; }
+  .beach-card .b-emoji { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+
+  /* MAISON */
+  .house-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+
+  .house-feat {
+    background: white;
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .house-feat .hf-icon { font-size: 1.8rem; margin-bottom: 6px; }
+  .house-feat p { font-size: 0.85rem; color: var(--text-muted); }
+
+  /* RÈGLES */
+  .rules-box {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.9rem;
+  }
+
+  .rule-item:last-child { border-bottom: none; }
+  .rule-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    background: var(--sea);
+    color: rgba(255,255,255,0.7);
+  }
+
+  footer strong { color: white; }
+
+  @media (max-width: 600px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .beach-grid { grid-template-columns: 1fr 1fr; }
+    .house-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="waves"></div>
+  <span class="hero-emoji">⛵</span>
+  <h1>Costa Brava<br><em>Août 2026</em></h1>
+  <p class="hero-sub">3 – 13 août · Calonge, Catalogne 🌊</p>
+  <div class="crew">
+    <span class="crew-chip">👨 Olivier</span>
+    <span class="crew-chip">💛 Amélie</span>
+    <span class="crew-chip">🎸 Eva</span>
+    <span class="crew-chip">🌸 Marinette</span>
+    <span class="crew-chip">🤙 Thomas</span>
+    <span class="crew-chip">✨ Lili</span>
+    <span class="crew-chip">🌟 Pauline</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#plages">🏖️ Plages</a>
+  <a href="#reserver">⚠️ À réserver</a>
+  <a href="#excursions">🗺️ Excursions</a>
+  <a href="#concerts">🎵 Concerts</a>
+  <a href="#maison">🏠 La maison</a>
+  <a href="#films">🎬 Soirées films</a>
+  <a href="#regles">📋 Règles</a>
+</nav>
+
+<main>
+
+  <!-- PLAGES -->
+  <section class="section" id="plages">
+    <div class="section-header">
+      <div class="section-icon sea">🏖️</div>
+      <h2>Plages & nature</h2>
+    </div>
+    <div class="beach-grid">
+      <div class="beach-card">
+        <span class="b-emoji">🏖️</span>
+        <h3>Plage de Sant Antoni</h3>
+        <p>Grande plage de sable, bien équipée, idéale pour toute la famille. À 5 min en voiture.</p>
+      </div>
+
+      <div class="beach-card" style="background: #1a6e7a;">
+        <span class="b-emoji">🪨</span>
+        <h3>Cala del Pi</h3>
+        <p>Petite crique tranquille et sauvage. Eau cristalline, cadre naturel préservé.</p>
+      </div>
+
+      <div class="beach-card" style="background: #15607a;">
+        <span class="b-emoji">🚣</span>
+        <h3>Cala Roques Planes</h3>
+        <p>Accessible par le sentier GR-92 ou en bateau. Formations rocheuses spectaculaires.</p>
+      </div>
+
+      <div class="beach-card" style="background: #124f70;">
+        <span class="b-emoji">🥾</span>
+        <h3>Camí de Ronda</h3>
+        <p>Sentier côtier longeant la mer. Sant Antoni → Platja d'Aro, 5,2 km A/R. Partir tôt !</p>
+      </div>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">💡 Marché de Calonge tous les mercredis matin sur la promenade — produits locaux, fruits frais, artisanat.</p>
+  </section>
+
+  <!-- RÉSERVER -->
+  <section class="section" id="reserver">
+    <div class="section-header">
+      <div class="section-icon terra">⚠️</div>
+      <h2>À réserver maintenant</h2>
+    </div>
+
+    <div class="urgent-banner" style="margin-bottom: 1rem; background: var(--sea);">
+      <div class="ub-icon">💡</div>
+      <div>
+        <h3>Conseil pratique</h3>
+        <p>Dalí et la Sagrada Familia sont très prisés en été — mieux vaut réserver à l'avance pour être tranquilles.</p>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="badge-book">À réserver</span>
+        <span class="card-emoji">🎭</span>
+        <h3>Musée Dalí — Figueres</h3>
+        <p>Le théâtre-musée surréaliste de Salvador Dalí. En août, ouverture nocturne 22h–1h — unique et magique pour les grands.</p>
+        <p style="margin-top: 8px; font-size: 0.8rem;">~23€/adulte · Gratuit -9 ans 🎉</p>
+        <a href="https://www.salvador-dali.org" target="_blank" class="dist">salvador-dali.org →</a>
+        <span class="dist" style="margin-left: 6px;">45 min</span>
+      </div>
+
+      <div class="card">
+        <span class="badge-book">À réserver</span>
+        <span class="card-emoji">⛪</span>
+        <h3>Sagrada Familia — Barcelone</h3>
+        <p>Le chef-d'œuvre de Gaudí. 2026 est l'année de son centenaire — prendre les billets avec accès aux tours pour la vue.</p>
+        <a href="https://www.sagradafamilia.org" target="_blank" class="dist">sagradafamilia.org →</a>
+        <span class="dist" style="margin-left: 6px;">1h20</span>
+      </div>
+
+      <div class="card">
+        <span class="badge-resa">À réserver</span>
+        <span class="card-emoji">🎤</span>
+        <h3>Cap Roig — Mika (8 août)</h3>
+        <p>Concert en plein air dans les jardins botaniques face à la mer. Mika présente son album Hyperlove — parfait pour tous les âges !</p>
+        <a href="https://www.caproigfestival.com" target="_blank" class="dist">caproigfestival.com →</a>
+        <span class="dist" style="margin-left: 6px;">15 min</span>
+      </div>
+
+      <div class="card">
+        <span class="badge-fam">Famille</span>
+        <span class="card-emoji">🎪</span>
+        <h3>Cap Roig — El Fil Invisible (10 août)</h3>
+        <p>Spectacle spécial familles au festival. Idéal pour Pauline et Lili dans ce cadre exceptionnel face à la Méditerranée.</p>
+        <a href="https://www.caproigfestival.com" target="_blank" class="dist">caproigfestival.com →</a>
+        <span class="dist" style="margin-left: 6px;">15 min</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCURSIONS -->
+  <section class="section" id="excursions">
+    <div class="section-header">
+      <div class="section-icon sun">🗺️</div>
+      <h2>Excursions à la journée</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-emoji">🎨</span>
+        <h3>Cadaqués</h3>
+        <p>Village de pêcheurs sublime, maison de Dalí à Portlligat à côté. Route sinueuse — partir tôt. L'un des plus beaux villages de Catalogne.</p>
+        <span class="dist">~1h15</span>
+      </div>
+
+      <div class="card">
+        <span class="card-emoji">🌆</span>
+        <h3>Barcelone — journée complète</h3>
+        <p>Barrio Gótico, La Boqueria, Sagrada Familia, Parc Güell. Prévoir une journée entière. Garer la voiture et prendre le métro.</p>
+        <span class="dist">~1h20</span>
+      </div>
+
+      <div class="card">
+        <span class="card-emoji">🏛️</span>
+        <h3>Gérone</h3>
+        <p>Cathédrale gothique, quartier médiéval, bain arabe. Demi-journée suffisante — compact, magnifique, facile.</p>
+        <span class="dist">~40 min</span>
+      </div>
+
+      <div class="card">
+        <span class="card-emoji">🏰</span>
+        <h3>Village médiéval de Pals</h3>
+        <p>Petit village médiéval très bien conservé. À combiner avec une plage sauvage à proximité pour la journée.</p>
+        <span class="dist">~14 km</span>
+      </div>
+
+      <div class="card">
+        <span class="card-emoji">🌿</span>
+        <h3>Château de Calonge</h3>
+        <p>À 4 km, en plein centre du vieux village. Le plus grand château de la région. Verre en terrasse sur la plaza après.</p>
+        <span class="dist">~10 min</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCERTS -->
+  <section class="section" id="concerts">
+    <div class="section-header">
+      <div class="section-icon sea">🎵</div>
+      <h2>Festival Cap Roig — nos dates</h2>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Jardins botaniques de Calella de Palafrugell · À 15 min · <a href="https://www.caproigfestival.com" target="_blank" style="color: var(--sea);">caproigfestival.com</a></p>
+
+    <div class="concert-list">
+      <div class="concert-item">
+        <div class="concert-date">4<span>août</span></div>
+        <div class="concert-info">
+          <h3>Juan Diego Flórez</h3>
+          <p>Ténor classique de renommée mondiale — soirée élégante</p>
+        </div>
+        <span class="concert-tag tag-local">Classique</span>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date">5<span>août</span></div>
+        <div class="concert-info">
+          <h3>Valeria Castro</h3>
+          <p>Folk/pop espagnol — douce, belle voix, ambiance intimiste</p>
+        </div>
+        <span class="concert-tag tag-local">Folk</span>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date">6<span>août</span></div>
+        <div class="concert-info">
+          <h3>Lax'N'Busto</h3>
+          <p>Rock catalan festif — ambiance garantie</p>
+        </div>
+        <span class="concert-tag tag-local">Rock</span>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date">7<span>août</span></div>
+        <div class="concert-info">
+          <h3>Pablo López</h3>
+          <p>Pop espagnol grand public — très populaire en Espagne</p>
+        </div>
+        <span class="concert-tag tag-local">Pop ES</span>
+      </div>
+
+      <div class="concert-item" style="border: 2px solid var(--sun); border-radius: 14px;">
+        <div class="concert-date" style="color: var(--terracotta);">8<span>août</span></div>
+        <div class="concert-info">
+          <h3>✨ Mika — <em>Hyperlove Tour</em></h3>
+          <p>International, tous les âges, ambiance folle — LE concert à ne pas manquer !</p>
+        </div>
+        <span class="concert-tag tag-star">⭐ Coup de cœur</span>
+      </div>
+
+      <div class="concert-item" style="border: 2px solid var(--green); border-radius: 14px;">
+        <div class="concert-date" style="color: var(--green);">10<span>août</span></div>
+        <div class="concert-info">
+          <h3>🎪 El Fil Invisible</h3>
+          <p>Spectacle spécial familles — parfait pour Pauline et Lili !</p>
+        </div>
+        <span class="concert-tag tag-fam">👨‍👩‍👧 Famille</span>
+      </div>
+
+      <div class="concert-item">
+        <div class="concert-date">11<span>août</span></div>
+        <div class="concert-info">
+          <h3>Rosario</h3>
+          <p>Pop espagnol — grande figure de la scène catalane</p>
+        </div>
+        <span class="concert-tag tag-local">Pop ES</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAISON -->
+  <section class="section" id="maison">
+    <div class="section-header">
+      <div class="section-icon green">🏠</div>
+      <h2>La villa</h2>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">Carrer Narcís Monturiol 3, Calonge · 300m² rénovés · Piscine eau salée 14m</p>
+    <div class="house-grid">
+      <div class="house-feat">
+        <div class="hf-icon">🏊</div>
+        <p>Piscine eau salée 14m + chaises longues</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🍹</div>
+        <p>Bar + grill gaz + machine à glaçons + kit cocktail</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🎬</div>
+        <p>3 vidéoprojecteurs Apple TV + Netflix</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🍕</div>
+        <p>Cuisine complète : raclette, machine à café grains, presse-agrumes…</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🏓</div>
+        <p>Ping-pong · Tournoi officiel prévu !</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🎯</div>
+        <p>Fléchettes · Tournoi officiel prévu !</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🃏</div>
+        <p>Poker, télescope</p>
+      </div>
+      <div class="house-feat">
+        <div class="hf-icon">🌳</div>
+        <p>Jardin avec orangers, citronniers et avocatiers</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.25rem; background: var(--terracotta); border-radius: 16px; padding: 1.5rem; color: white;">
+      <p style="font-weight: 500; font-size: 1.05rem; margin-bottom: 1rem;">🏆 Tournois de la villa</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div style="background: rgba(255,255,255,0.12); border-radius: 12px; padding: 1rem;">
+          <p style="font-size: 1.4rem; margin-bottom: 6px;">🏓</p>
+          <p style="font-weight: 500; margin-bottom: 4px;">Tournoi Ping-pong</p>
+          <p style="font-size: 0.82rem; opacity: 0.85;">Format à définir ensemble — 4 raquettes fournies. Qui sera champion·ne ?</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.12); border-radius: 12px; padding: 1rem;">
+          <p style="font-size: 1.4rem; margin-bottom: 6px;">🎯</p>
+          <p style="font-weight: 500; margin-bottom: 4px;">Tournoi Fléchettes</p>
+          <p style="font-size: 0.82rem; opacity: 0.85;">Phases de poule + finale. Le trophée : une Horchata offerte par le perdant.</p>
+        </div>
+      </div>
+      <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 12px; text-align: center;">📊 Tableau des scores à faire à la main sur le frigo</p>
+    </div>
+
+    <div id="films" style="margin-top: 1rem; background: #1a1a2e; border-radius: 16px; padding: 1.5rem; color: white;">
+      <p style="font-weight: 500; font-size: 1.05rem; margin-bottom: 0.4rem;">🎬 Soirées cinéma</p>
+      <p style="font-size: 0.82rem; opacity: 0.65; margin-bottom: 1rem;">3 vidéoprojecteurs Netflix disponibles — canapés, couvertures, popcorn</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+        <div style="background: rgba(255,255,255,0.07); border-radius: 12px; padding: 1rem;">
+          <p style="font-size: 1.2rem; margin-bottom: 6px;">👨‍👩‍👧‍👦</p>
+          <p style="font-weight: 500; font-size: 0.9rem; margin-bottom: 4px;">Soirée famille</p>
+          <p style="font-size: 0.8rem; opacity: 0.7;">Un film que tout le monde regarde ensemble — vote à la majorité !</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.07); border-radius: 12px; padding: 1rem;">
+          <p style="font-size: 1.2rem; margin-bottom: 6px;">🌙</p>
+          <p style="font-weight: 500; font-size: 0.9rem; margin-bottom: 4px;">Soirée grands</p>
+          <p style="font-size: 0.8rem; opacity: 0.7;">Après que Pauline est couchée — série, thriller ou comédie au choix.</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.07); border-radius: 12px; padding: 1rem;">
+          <p style="font-size: 1.2rem; margin-bottom: 6px;">🌧️</p>
+          <p style="font-weight: 500; font-size: 0.9rem; margin-bottom: 4px;">Plan B pluie</p>
+          <p style="font-size: 0.8rem; opacity: 0.7;">Si la météo lâche — marathon films, raclette et jeux de société.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 1rem; background: var(--sun-light); border-radius: 14px; padding: 1.25rem;">
+      <p style="font-weight: 500; margin-bottom: 0.5rem;">🛏️ Répartition des chambres</p>
+      <p style="font-size: 0.875rem; color: var(--text-muted);">Suite RDC (lit double, sdb privée, accès piscine) → <strong>Olivier & Amélie</strong><br>
+      Suite 1er (lit double, sdb privée, terrasse piscine) → <strong>Marinette & Thomas</strong><br>
+      Chambre 1er (2 lits simples) → <strong>Eva</strong><br>
+      Chambre 1er (2 lits simples) → <strong>Lili & Pauline</strong></p>
+    </div>
+  </section>
+
+  <!-- RÈGLES -->
+  <section class="section" id="regles">
+    <div class="section-header">
+      <div class="section-icon terra">📋</div>
+      <h2>Règles de la maison</h2>
+    </div>
+    <div class="rules-box">
+      <div class="rule-item">
+        <span class="rule-icon">🕔</span>
+        <span>Arrivée à partir de <strong>17h</strong> — Départ avant <strong>11h</strong></span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🔇</span>
+        <span>Calme après <strong>22h</strong> — pas de musique forte, pas d'enceintes (règle espagnole stricte)</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🚭</span>
+        <span>Interdiction de fumer à l'intérieur</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">👥</span>
+        <span>Maximum 8 personnes — on est 7, c'est bon ✅</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-icon">🐾</span>
+        <span>Animaux acceptés</span>
+      </div>
+      <div class="rule-item" style="background: var(--terracotta-light); border-radius: 10px; padding: 10px 12px; margin-top: 8px; border: none;">
+        <span class="rule-icon">🧹</span>
+        <div>
+          <p style="font-weight: 500; margin-bottom: 4px;">Check-out — à faire avant de partir</p>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Maison rangée · Serviettes par terre dans les salles de bain · Draps en place · Poubelles jetées · Lumières éteintes · Tout verrouillé · <strong>L'hôte vient faire le check-out en personne</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🌊 <strong>Costa Brava 2026</strong> — 3 au 13 août · Calonge, Catalogne</p>
+  <p style="margin-top: 4px;">Fait avec ❤️ pour la famille</p>
+</footer>
+
+</body>
+</html>
